@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galerie de Photos Interactive</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #image {
+            width: 500px;
+            height: 300px;
+            background-color: #f0f0f0;
+            background-size: cover;
+            text-align: center;
+            line-height: 300px;
+            font-size: 20px;
+            color: #333;
+            border: 2px solid #ccc;
+            margin-bottom: 20px;
+        }
+        .thumbnail {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .thumbnail:hover {
+            transform: scale(1.1);
+        }
+        figure {
+            display: inline-block;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Galerie de Photos Interactive</h1>
+    <div id="image">Hover over an image below to display here</div>
+
+    <div>
+        <figure tabindex="0">
+            <img src="image1.jpg" alt="Image 1" class="thumbnail" onmouseover="upDate(this)" onmouseleave="unDo()" onfocus="focusImage(this)" onblur="blurImage(this)">
+            <figcaption>Image 1</figcaption>
+        </figure>
+        <figure tabindex="0">
+            <img src="image2.jpg" alt="Image 2" class="thumbnail" onmouseover="upDate(this)" onmouseleave="unDo()" onfocus="focusImage(this)" onblur="blurImage(this)">
+            <figcaption>Image 2</figcaption>
+        </figure>
+        <figure tabindex="0">
+            <img src="image3.jpg" alt="Image 3" class="thumbnail" onmouseover="upDate(this)" onmouseleave="unDo()" onfocus="focusImage(this)" onblur="blurImage(this)">
+            <figcaption>Image 3</figcaption>
+        </figure>
+        <figure tabindex="0">
+            <img src="image4.jpg" alt="Image 4" class="thumbnail" onmouseover="upDate(this)" onmouseleave="unDo()" onfocus="focusImage(this)" onblur="blurImage(this)">
+            <figcaption>Image 4</figcaption>
+        </figure>
+        <figure tabindex="0">
+            <img src="image5.jpg" alt="Image 5" class="thumbnail" onmouseover="upDate(this)" onmouseleave="unDo()" onfocus="focusImage(this)" onblur="blurImage(this)">
+            <figcaption>Image 5</figcaption>
+        </figure>
+        <figure tabindex="0">
+            <img src="image6.jpg" alt="Image 6" class="thumbnail" onmouseover="upDate(this)" onmouseleave="unDo()" onfocus="focusImage(this)" onblur="blurImage(this)">
+            <figcaption>Image 6</figcaption>
+        </figure>
+    </div>
+
+    <script>
+        // Fonction pour mettre à jour l'image et le texte lors du survol
+        function upDate(previewPic) {
+            const imageDiv = document.getElementById("image");
+            imageDiv.style.backgroundImage = `url(${previewPic.src})`;
+            imageDiv.innerHTML = previewPic.alt;
+        }
+
+        // Fonction pour réinitialiser l'image et le texte lorsque la souris quitte l'image
+        function unDo() {
+            const imageDiv = document.getElementById("image");
+            imageDiv.style.backgroundImage = "";
+            imageDiv.innerHTML = "Hover over an image below to display here";
+        }
+
+        // Fonction pour gérer le focus sur l'image
+        function focusImage(previewPic) {
+            previewPic.style.border = "2px solid blue";
+            console.log('Focus sur l\'image:', previewPic.alt);
+        }
+
+        // Fonction pour gérer la perte de focus
+        function blurImage(previewPic) {
+            previewPic.style.border = "";
+            console.log('Perte de focus sur l\'image:', previewPic.alt);
+        }
+
+        // Fonction pour ajouter l'attribut tabindex à chaque image au chargement de la page
+        window.onload = function() {
+            const images = document.querySelectorAll(".thumbnail");
+            images.forEach(function(img, index) {
+                img.setAttribute("tabindex", index + 1); // Ajouter tabindex
+                console.log(`Tabindex ajouté à l'image ${img.alt}: ${index + 1}`);
+            });
+        };
+    </script>
+    
+</body>
+</html>
